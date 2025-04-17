@@ -21,8 +21,8 @@ class Communication:
 
         data = json.dumps({"request": "subscribe", 
                 "port": self.port,
-                "name": "tkt",
-                "matricules" : ["23022", "23061"]})
+                "name": "test",
+                "matricules" : ["23022"]})
 
         send = self.__sb.send(data.encode())
         
@@ -40,31 +40,30 @@ class Communication:
             print("Subscription successful")
             self.__sb.close()
             self.__sg.bind((socket.gethostname(), self.port))
-            self.ping_pong()
+
             
         else:
             print("Subscription failed")
             self.subscribe()
 
-    def ping_pong(self):
-        
-        self.__sg.listen()       #* on va surement mettre listen et if dans run comme ça, ça doit pas passer H24 par ping_pong donc en gros y'aura que le dumps et send
-        gest, addr =self.__sg.accept()
-
-        respond = json.loads(gest.recv(1024).decode())
-
-        if respond.get("request") == "ping":
+    def ping_pong(self,gest):
             print("Ping received")
             data = json.dumps({"response": "pong"})
             gest.send(data.encode())
+            print("Pong sent")
+
+    def run(self):
+        while True:
+            self.__sg.listen()
+            self.gest, addr =self.__sg.accept()
+            respond = json.loads(self.gest.recv(1024).decode())
+
+            if respond.get("request") == "ping":
+                self.ping_pong(self.gest)
 
 
 
-
-
-
-
-Communication("172.17.10.43",3000) #! IP Julie
+Communication("172.17.10.43",3000).run() #! IP Julie
 
 
 
