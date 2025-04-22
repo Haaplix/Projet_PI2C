@@ -1,6 +1,6 @@
 import socket
 import json
-
+import main
 
 
 class Communication:
@@ -12,7 +12,7 @@ class Communication:
         self.__sg = sg
         self.ip_gest = ip     #! IP et port gestionnaire
         self.port_gest = port
-        self.port = 8080
+        self.port = 8081
         self.subscribe()
 
 
@@ -21,8 +21,8 @@ class Communication:
 
         data = json.dumps({"request": "subscribe", 
                 "port": self.port,
-                "name": "test",
-                "matricules" : ["23022"]})
+                "name": "QT_3000",
+                "matricules" : ["23022","23061"]})
 
         send = self.__sb.send(data.encode())
         
@@ -60,10 +60,14 @@ class Communication:
 
             if respond.get("request") == "ping":
                 self.ping_pong(self.gest)
+            
+            if respond.get("request") == "play":
+               move = json.dumps(main.game().move(respond.get("state"))) #put the move in a json to send to the sever
+               self.gest.send(move.encode())
 
 
 
-Communication("172.17.10.43",3000).run() #! IP Julie
+Communication("172.17.10.45",3000).run() #! IP Julie
 
 
 
