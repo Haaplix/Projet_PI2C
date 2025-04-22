@@ -14,8 +14,8 @@ class game:
 
 
         if self.state["piece"] == None: #if we're first 
-            piece_giv = random.choice(self.list_piece_possible)
-            print(self.list_piece_possible)
+            piece_giv = "".join(random.choice(self.list_piece_possible))
+        
 
             return {"response": "move",
                     "move": {"piece":piece_giv}
@@ -24,10 +24,13 @@ class game:
         else: 
             self.piece_got = self.state["piece"]
             self.remove()
-            print(str(random.choice(self.list_piece_possible)).join)
+            if len(self.list_piece_possible) != 0:
+                self.piece_giv = "".join(random.choice(self.list_piece_possible))
+            else:
+                self.piece_giv = None
             return {"response": "move",
                     "move": {"pos":self.pos(),
-                             "piece":str(random.choice(self.list_piece_possible)).join}
+                             "piece":self.piece_giv}
                     }
     
 
@@ -40,6 +43,7 @@ class game:
     def pos(self):
         L = []
         for i,t in enumerate(self.board):
+
             if t == None:
                 L.append(i)
         return random.choice(L)
