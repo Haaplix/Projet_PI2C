@@ -95,11 +95,13 @@ class game:
                 for line in self.lines:
                     res = 0 
                     for case in line:
+                        jsp = 0
                         if board_new[case] != None:
                             cara_case = set(board_new[case])
                             print(cara_case, "case")
                             print(cara," qu'on veut")
-                            print(best_res)
+                          #  print(best_res)
+                            jsp += 1
                             if cara_case == cara:
                                 res += 1 
                     
