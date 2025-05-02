@@ -1,7 +1,7 @@
 import socket
 import json
 import main
-
+import RandBot
 
 class Communication:
 
@@ -12,7 +12,7 @@ class Communication:
         self.__sg = sg
         self.ip_gest = ip     #! IP et port gestionnaire
         self.port_gest = port
-        self.port = 8081
+        self.port = 8080
         self.subscribe()
 
 
@@ -67,7 +67,7 @@ class Communication:
 
 
 
-Communication("172.17.10.133",3000).run() #! IP Julie
+Communication("192.168.1.45",3000).run() #! IP Julie
 
 
 

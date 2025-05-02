@@ -1,17 +1,42 @@
 import json
 import random
+import time
+
+
+
+def timeit(fun):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        res = fun(*args, **kwargs)
+        print('Executed in {}s'.format(time.time() - start))
+        return res
+    return wrapper
 
 
 class game:
     def __init__(self):
         self.list_piece_possible = [set("BDEC"),set("BDEP"),set("BDFC"),set("BDFP"),set("BLEC"),set("BLFC"),set("BLEP"),set("BLFP"),
                       set("SDEC"),set("SDEP"),set("SDFC"),set("SDFP"),set("SLEC"),set("SLFC"),set("SLEP"),set("SLFP")]
-
+        
+        self.lines =[[0,1,2,3],
+                     [4,5,6,7],
+                     [8,9,10,11],
+                     [12,13,14,15],
+                     [0,4,8,12],
+                     [1,5,9,13],
+                     [2,6,10,14],
+                     [3,7,11,15],
+                     [0,5,10,15],
+                     [3,6,9,12]]
+        
+    
+    
+    @timeit
     def move(self, state):
 
         self.state = state #make a unit test to check if it loads correctly
         self.board = self.state["board"]
-
+        
 
         if self.state["piece"] == None: #if we're first 
             piece_giv = "".join(random.choice(self.list_piece_possible))
@@ -28,11 +53,20 @@ class game:
                 self.piece_giv = "".join(random.choice(self.list_piece_possible))
             else:
                 self.piece_giv = None
-            return {"response": "move",
-                    "move": {"pos":self.pos(),
+
+            if self.board == [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None]:
+                print("aaaaaa")
+                return {"response": "move",
+                    "move": {"pos": self.pos(),
                              "piece":self.piece_giv}
                     }
+            else:
     
+                return {"response": "move",
+                        "move": {"pos": self.heu_pos(),
+                                "piece":self.piece_giv}
+                        }
+        
 
     def remove(self):
         self.list_piece_possible.remove(set(self.piece_got))
@@ -48,3 +82,32 @@ class game:
                 L.append(i)
         return random.choice(L)
 
+
+    def heu_pos(self):
+        board_init = self.board
+        board_new = self.board
+        cara = set(self.piece_got)
+        best_res = 0
+        best_pos = None
+        for i,t in enumerate(board_init): 
+            if t == None:
+                board_new[i] = self.piece_got
+                for line in self.lines:
+                    res = 0 
+                    for case in line:
+                        if board_new[case] != None:
+                            cara_case = set(board_new[case])
+                            print(cara_case, "case")
+                            print(cara," qu'on veut")
+                            print(best_res)
+                            if cara_case == cara:
+                                res += 1 
+                    
+                    if best_res < res:
+                        best_res = res
+                        best_pos = i
+                        
+
+            else: 
+                pass
+        return best_pos

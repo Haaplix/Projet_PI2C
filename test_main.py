@@ -6,8 +6,15 @@ def test_si_dernier_move():
   "players": ["LUR", "FKY"],
   "current": 0,
   "board": ["BDEC",None,"BDFC","BDFP","BLEC","BLFC","BLEP","BLFP",
-                      "SDEC","SDEP","SDFC","SDFP","SLEC","SLFC","SLEP","SLFP"],
+            "SDEC","SDEP","SDFC","SDFP","SLEC","SLFC","SLEP","SLFP"],
   "piece": "BDEP"
 }) == {"response": "move",
         "move": {"pos":1,"piece": None}
     }
+
+# def test_si_nous_1er_move(): 
+#     assert main.game().move({"players": ["LUR", "FKY"],
+#   "current": 0,
+#   "board": [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
+#   "piece": "BDEP"
+#         }) == 
