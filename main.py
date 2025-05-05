@@ -1,7 +1,7 @@
 import json
 import random
 import time
-
+import copy
 
 
 def timeit(fun):
@@ -55,7 +55,6 @@ class game:
                 self.piece_giv = None
 
             if self.board == [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None]:
-                print("aaaaaa")
                 return {"response": "move",
                     "move": {"pos": self.pos(),
                              "piece":self.piece_giv}
@@ -85,25 +84,22 @@ class game:
 
     def heu_pos(self):
         board_init = self.board
-        board_new = self.board
+        board_new = copy.deepcopy(self.board)
         cara = set(self.piece_got)
         best_res = 0
         best_pos = None
         for i,t in enumerate(board_init): 
+            board_new = copy.deepcopy(self.board)
             if t == None:
                 board_new[i] = self.piece_got
+                print(board_new)
                 for line in self.lines:
                     res = 0 
                     for case in line:
                         jsp = 0
                         if board_new[case] != None:
                             cara_case = set(board_new[case])
-                            print(cara_case, "case")
-                            print(cara," qu'on veut")
-                          #  print(best_res)
-                            jsp += 1
-                            if cara_case == cara:
-                                res += 1 
+                            res = len(cara.intersection(cara_case))
                     
                     if best_res < res:
                         best_res = res
