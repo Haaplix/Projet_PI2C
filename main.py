@@ -95,17 +95,23 @@ class game:
                 print(board_new)
                 for line in self.lines:
                     res = 0 
+                    result = 0
                     for case in line:
-                        jsp = 0
                         if board_new[case] != None:
                             cara_case = set(board_new[case])
                             res = len(cara.intersection(cara_case))
+                            print(res)
+                            if res == 4:
+                                print("cara:",cara,"cara_case:",cara_case)
+                        result += res
+                    print("result:",result)
                     
-                    if best_res < res:
-                        best_res = res
+                    if best_res < result:
+                        best_res = result
                         best_pos = i
                         
 
             else: 
                 pass
+            print("bestres:",best_res)
         return best_pos
