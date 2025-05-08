@@ -86,7 +86,7 @@ class game:
         board_init = self.board
         board_new = copy.deepcopy(self.board)
         cara = set(self.piece_got)
-        best_res = 0
+        best_res = float('-inf')
         best_pos = None
         for i,t in enumerate(board_init): 
             board_new = copy.deepcopy(self.board)
@@ -105,14 +105,20 @@ class game:
                                     D[lettre] = res + 1
                     print(D)
 
-                    if best_res < result:
-                        best_res = result
-                        best_pos = i
-                        
+                    for value in D.values():
+                        if value == 4:
+                            print("i:",i,"best_pos:",best_pos)
+                            print(board_new)
+                            return i
+                        if best_res < value:
+                            best_res = value
+                            best_pos = i
 
             else: 
                 pass
+
             print("bestres:",best_res)
+            print("best_pos:",best_pos)
         return best_pos
     
 
@@ -134,11 +140,11 @@ class game:
                         for case in line: 
 
                             if board_new[case] != None:
-                                print(board_new[case])
                                 cara_case = board_new[case][1]
                                 res = len(cara.intersection(cara_case))
 
                         if res < worst_res:
+                            worst_res = res
                             self.piece_giv = "".join(maybe_piece[1])
                     
 
