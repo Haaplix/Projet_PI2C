@@ -114,9 +114,6 @@ class game:
                             best_res = value
                             best_pos = i
 
-            else: 
-                pass
-
             print("bestres:",best_res)
             print("best_pos:",best_pos)
         return best_pos
