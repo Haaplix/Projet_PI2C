@@ -94,18 +94,17 @@ class game:
                 board_new[i] = self.piece_got
                 print(board_new)
                 for line in self.lines:
-                    res = 0 
+                    D = {"S":0,"B":0,"D":0,"L":0,"E":0,"F":0,"P":0,"C":0}
                     result = 0
                     for case in line:
                         if board_new[case] != None:
                             cara_case = set(board_new[case])
-                            res = len(cara.intersection(cara_case))
-                            print(res)
-                            if res == 4:
-                                print("cara:",cara,"cara_case:",cara_case)
-                        result += res
-                    print("result:",result)
-                    
+                            for lettre in cara:
+                                res = D.get(lettre)
+                                if lettre in cara.intersection(cara_case):
+                                    D[lettre] = res + 1
+                    print(D)
+
                     if best_res < result:
                         best_res = result
                         best_pos = i
