@@ -26,15 +26,7 @@ class Communication:
 
         send = self.__sb.send(data.encode())
         
-        chunk = []
-        finished = False
-
-        while not finished:
-
-            data = self.__sb.recv(1024)
-            chunk.append(data)
-            finished = data == b''
-        response = json.loads(b"".join(chunk).decode())
+        response = self.recive(self.__sb)
 
         if response.get("response") == "ok":
             print("Subscription successful")
@@ -46,6 +38,23 @@ class Communication:
             print("Subscription failed")
             self.subscribe()
 
+    
+    def recive(self,s):
+        chunk = []
+        finished = False
+
+        while not finished:
+            data = s.recv(1024)
+            chunk.append(data)
+            
+            try:
+                response = json.loads(b"".join(chunk).decode())
+                finished = True
+            except IndentationError:
+                pass
+        return response
+
+
     def ping_pong(self,gest):
             print("Ping received")
             data = json.dumps({"response": "pong"})
@@ -56,7 +65,7 @@ class Communication:
         while True:
             self.__sg.listen()
             self.gest, addr =self.__sg.accept()
-            respond = json.loads(self.gest.recv(1024).decode())
+            respond = self.recive(self.gest)
 
             if respond.get("request") == "ping":
                 self.ping_pong(self.gest)
@@ -67,7 +76,7 @@ class Communication:
 
 
 
-Communication("172.17.10.133",3000).run() #! IP Julie
+Communication("192.168.1.24",3000).run() #! IP Julie
 
 
 
