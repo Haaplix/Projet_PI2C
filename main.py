@@ -63,7 +63,7 @@ class game:
     
                 return {"response": "move",
                         "move": {"pos": self.heu_pos(),
-                                "piece":self.piece_giv}
+                                "piece":self.piece_that_we_give()}
                         }
         
 
@@ -115,3 +115,33 @@ class game:
                 pass
             print("bestres:",best_res)
         return best_pos
+    
+
+    def piece_that_we_give(self):
+        board_init = self.board
+        board_new = copy.deepcopy(self.board)
+        worst_res = float("+inf")
+
+        for i,t in enumerate(board_init):
+            board_new = copy.deepcopy(self.board)
+            for maybe_piece in  enumerate(self.list_piece_possible):
+                #print(maybe_piece)
+                cara = maybe_piece[1]
+                if t == None:
+                    board_new[i] = maybe_piece
+                    for line in self.lines:
+                        res = 0
+                    
+                        for case in line: 
+
+                            if board_new[case] != None:
+                                print(board_new[case])
+                                cara_case = board_new[case][1]
+                                res = len(cara.intersection(cara_case))
+
+                        if res < worst_res:
+                            self.piece_giv = "".join(maybe_piece[1])
+                    
+
+                            
+        return self.piece_giv
