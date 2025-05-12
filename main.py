@@ -92,7 +92,6 @@ class game:
             board_new = copy.deepcopy(self.board)
             if t == None:
                 board_new[i] = self.piece_got
-                print(board_new)
                 for line in self.lines:
                     D = {"S":0,"B":0,"D":0,"L":0,"E":0,"F":0,"P":0,"C":0}
                     result = 0
@@ -107,15 +106,11 @@ class game:
 
                     for value in D.values():
                         if value == 4:
-                            print("i:",i,"best_pos:",best_pos)
-                            print(board_new)
                             return i
                         if best_res < value:
                             best_res = value
                             best_pos = i
 
-            print("bestres:",best_res)
-            print("best_pos:",best_pos)
         return best_pos
     
 
