@@ -56,7 +56,7 @@ class game:
 
             if self.board == [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None]:
                 return {"response": "move",
-                    "move": {"pos": self.pos(),
+                    "move": {"pos": self.pos_random(),
                              "piece":self.piece_giv}
                     }
             else:
@@ -73,7 +73,7 @@ class game:
             if i != None:
                 self.list_piece_possible.remove(set(i))
 
-    def pos(self):
+    def pos_random(self):
         L = []
         for i,t in enumerate(self.board):
 
@@ -92,10 +92,10 @@ class game:
             board_new = copy.deepcopy(self.board)
             if t == None:
                 board_new[i] = self.piece_got
-                print(board_new)
+
                 for line in self.lines:
                     D = {"S":0,"B":0,"D":0,"L":0,"E":0,"F":0,"P":0,"C":0}
-                    result = 0
+
                     for case in line:
                         if board_new[case] != None:
                             cara_case = set(board_new[case])
@@ -103,19 +103,17 @@ class game:
                                 res = D.get(lettre)
                                 if lettre in cara.intersection(cara_case):
                                     D[lettre] = res + 1
-                    print(D)
+                    
 
-                    for value in D.values():
+                    for value in  D.values():
                         if value == 4:
-                            print("i:",i,"best_pos:",best_pos)
-                            print(board_new)
+                           
                             return i
                         if best_res < value:
                             best_res = value
                             best_pos = i
 
-            print("bestres:",best_res)
-            print("best_pos:",best_pos)
+
         return best_pos
     
 
@@ -126,9 +124,9 @@ class game:
 
         for i,t in enumerate(board_init):
             board_new = copy.deepcopy(self.board)
-            for maybe_piece in  enumerate(self.list_piece_possible):
-                #print(maybe_piece)
-                cara = maybe_piece[1]
+            for j,maybe_piece in  enumerate(self.list_piece_possible): # j c'est l'indice de ce enumerate 
+                d = {"S":0,"B":0,"D":0,"L":0,"E":0,"F":0,"P":0,"C":0}
+                cara = maybe_piece #because maybe dis like this (1, {'E', 'P', 'L', 'B'})
                 if t == None:
                     board_new[i] = maybe_piece
                     for line in self.lines:
@@ -137,13 +135,11 @@ class game:
                         for case in line: 
 
                             if board_new[case] != None:
-                                cara_case = board_new[case][1]
-                                res = len(cara.intersection(cara_case))
+                                cara_case = board_new[case]
+                                print(cara_case, "cara_case")
 
                         if res < worst_res:
                             worst_res = res
-                            self.piece_giv = "".join(maybe_piece[1])
-                    
+                            self.piece_giv = "".join(maybe_piece)
 
-                            
         return self.piece_giv
