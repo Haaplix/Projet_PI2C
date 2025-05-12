@@ -125,8 +125,13 @@ class game:
         for i,t in enumerate(board_init):
             board_new = copy.deepcopy(self.board)
             for j,maybe_piece in  enumerate(self.list_piece_possible): # j c'est l'indice de ce enumerate 
+<<<<<<< HEAD
                 d = {"S":0,"B":0,"D":0,"L":0,"E":0,"F":0,"P":0,"C":0}#
                 cara = maybe_piece #because maybe dis like this (1, {'E', 'P', 'L', 'B'})
+=======
+                d = {"S":0,"B":0,"D":0,"L":0,"E":0,"F":0,"P":0,"C":0}
+                cara = maybe_piece 
+>>>>>>> 6193e1df9ff5933bbe7dca79632c40dfc15ea7a1
                 if t == None:
                     board_new[i] = maybe_piece
                     for line in self.lines:
@@ -135,11 +140,18 @@ class game:
                         for case in line: 
 
                             if board_new[case] != None:
-                                cara_case = board_new[case]
+                                cara_case = set(board_new[case])
                                 print(cara_case, "cara_case")
+                                for letter in cara_case: 
+                                    res = d.get(letter)
+                                    if letter in cara.intersection(cara_case):
+                                        d[letter] = res + 1
 
-                        if res < worst_res:
-                            worst_res = res
-                            self.piece_giv = "".join(maybe_piece)
+                        for value in  d.values():
+                            if value == 0:
+                            
+                                return i
+                            if value < worst_res:
+                                self.piece_giv = maybe_piece
 
         return self.piece_giv
