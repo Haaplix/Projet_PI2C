@@ -125,7 +125,7 @@ class game:
         for i,t in enumerate(board_init):
             board_new = copy.deepcopy(self.board)
             for j,maybe_piece in  enumerate(self.list_piece_possible): # j c'est l'indice de ce enumerate 
-                d = {"S":0,"B":0,"D":0,"L":0,"E":0,"F":0,"P":0,"C":0}
+                d = {"S":0,"B":0,"D":0,"L":0,"E":0,"F":0,"P":0,"C":0}#
                 cara = maybe_piece #because maybe dis like this (1, {'E', 'P', 'L', 'B'})
                 if t == None:
                     board_new[i] = maybe_piece
