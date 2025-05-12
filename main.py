@@ -88,6 +88,7 @@ class game:
         cara = set(self.piece_got)
         best_res = float('-inf')
         best_pos = None
+
         for i,t in enumerate(board_init): 
             board_new = copy.deepcopy(self.board)
             if t == None:
@@ -102,7 +103,6 @@ class game:
                                 res = D.get(lettre)
                                 if lettre in cara.intersection(cara_case):
                                     D[lettre] = res + 1
-                    print(D)
 
                     for value in D.values():
                         if value == 4:
@@ -118,27 +118,48 @@ class game:
         board_init = self.board
         board_new = copy.deepcopy(self.board)
         worst_res = float("+inf")
+        list_piece_new = copy.deepcopy(self.list_piece_possible)
 
         for i,t in enumerate(board_init):
             board_new = copy.deepcopy(self.board)
-            for maybe_piece in  enumerate(self.list_piece_possible):
+            for maybe_piece in list_piece_new:
                 #print(maybe_piece)
-                cara = maybe_piece[1]
+                cara = maybe_piece
                 if t == None:
                     board_new[i] = maybe_piece
                     for line in self.lines:
                         res = 0
-                    
+                        result = 0
+                        d = {"S":0,"B":0,"D":0,"L":0,"E":0,"F":0,"P":0,"C":0}
                         for case in line: 
+                            if i in line:
+                                if board_new[case] != None:
+                                    cara_case = set(board_new[case])
+                                    result = len(cara.intersection(cara_case))
+                                    for lettre in cara:
+                                        res = d.get(lettre)
+                                        if lettre in cara.intersection(cara_case):
+                                            d[lettre] = res + 1
 
-                            if board_new[case] != None:
-                                cara_case = board_new[case][1]
-                                res = len(cara.intersection(cara_case))
+                        for key, value in d.items():
+                            if value == 4:
+                                list_piece_to_remove = []
+                                for bad_piece in list_piece_new:
+                                    if len(bad_piece.intersection(key)) > 0 :
+                                        list_piece_to_remove.append(bad_piece)
+                                for a in list_piece_to_remove:
+                                    if len(list_piece_new) > 1:
+                                        list_piece_new.remove(a)
+                                    
 
-                        if res < worst_res:
-                            worst_res = res
-                            self.piece_giv = "".join(maybe_piece[1])
+                            if len(list_piece_new) == 1:
+                                self.piece_giv = "".join(list_piece_new[0])
+                                return self.piece_giv
+                            
+                            else:
+                                worst_piece = random.choice(list_piece_new)
+                                self.piece_giv = "".join(worst_piece)
                     
 
-                            
+                          
         return self.piece_giv
