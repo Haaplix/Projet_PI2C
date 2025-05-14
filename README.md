@@ -1,16 +1,31 @@
 # Projet informatique 2025 - Algorithme quarto
 
+Cet algorithme permet de jouer au jeu quarto grâce au gestionnaire de partie https://github.com/qlurkin/PI2CChampionshipRunner.git.
+
 ## Stratégie
 
-
+La stratégie utilisée pour permettre au bot de gagner ses parties est divisée en deux sections:
+* Poser la pièce reçue
+* Donner la pièce suivante
 
 ### Choisir la position de la pièce reçue
 
+La position de la première pièce à placer est choisie aléatoirement.
 
+On pose la pièce reçue sur une case et on regarde pour chaque ligne quelles pièces ont des caractéristiques en commun avec la pièce reçue. On vérifie pour chaque caractéristiques combien de fois elles sont en commun avec les caractéristiques de notre pièce reçue. 
+
+Quand il y a quatre fois la même caractéristique en commun sur une ligne, c'est une ligne gagnante (la pièce reçue est comptée avec), donc on pose notre pièce à cet endroit.
+Dans les autres cas, on place la pièce ou il y a le plus grand nombre d'une caractéristique en commun.
 
 ### Choisir la pièce à donner
 
+La première pièce à donner est choisie aléatoirement.
 
+Pour chaque pièce possible à jouer, pour chaque case, pour chaque ligne, on vérifie combien il y a de caractéristiques les mêmes en commun.
+
+Si il y a quatre fois la même caractéristique en commun sur une ligne, on supprime toutes les pièces qui possèdent cette caractéristique dans le liste des pièces possible à donner.
+
+Pour les autres cas, on donne une pièce au hasard dans la liste des pièces possibles.
 
 ## Bibliothèques utilisées
 
