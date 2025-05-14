@@ -30,8 +30,8 @@ class game:
                 self.piece_giv = None
             return {"response": "move",
                     "move": {"pos":self.pos(),
-                             "piece":self.piece_giv,
-                             "message":"Imagine être plus nul qu'un random"}
+                             "piece":self.piece_giv},
+                    "message":"Imagine être plus nul qu'un random"
                     }
     
 
