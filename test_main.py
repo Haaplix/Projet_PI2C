@@ -1,16 +1,19 @@
 import pytest 
 import main 
+import test
 
 def test_si_dernier_move():
-  assert main.game().move({
+    result = main.game().move({
   "players": ["23022", "23061"],
   "current": 0,
   "board": ["BDEC",None,"BDFC","BDFP","BLEC","BLFC","BLEP","BLFP",
             "SDEC","SDEP","SDFC","SDFP","SLEC","SLFC","SLEP","SLFP"],
   "piece": "BDEP"
-}) == {"response": "move",
-        "move": {"pos":1,"piece": None}
-    }
+  
+})
+    assert result["response"] == "move"
+    assert result["move"]["pos"] == 1
+    assert result["move"]["piece"] == None
 
 def test_si_nous_1er_move(): 
 
@@ -54,3 +57,15 @@ def test_donner_bonne_piece():
     })
    
    assert set(result["move"]["piece"]) not in piece_not_to_give
+
+def test_si_dernier_move2():
+    result = test.game().move({
+  "players": ["23022", "23061"],
+  "current": 0,
+  "board": ["BDEC",None,"BDFC","BDFP","BLEC","BLFC","BLEP","BLFP",
+            "SDEC","SDEP","SDFC","SDFP","SLEC","SLFC","SLEP","SLFP"],
+  "piece": "BDEP"
+})
+    assert result["response"] == "move"
+    assert result["move"]["pos"] == 1
+    assert result["move"]["piece"] == None
