@@ -23,9 +23,9 @@ La première pièce à donner est choisie aléatoirement.
 
 Pour chaque pièce possible à jouer, pour chaque case, pour chaque ligne, on vérifie combien il y a de caractéristiques les mêmes en commun.
 
-Si il y a quatre fois la même caractéristique en commun sur une ligne, on supprime toutes les pièces qui possèdent cette caractéristique dans le liste des pièces possible à donner.
+Si il y a quatre fois la même caractéristique en commun sur une ligne, on ne prend pas la piece en compte en faisant un break dans la boucle pour qu'elle ne soit pas choisie. On change aussi une variable de False à true pour être sur qu'elle ne soit pas choisie.
 
-Pour les autres cas, on donne une pièce au hasard dans la liste des pièces possibles.
+Pour les autres cas, on calcule de la même manière que pour la position de la pièce reçue mais ici la condition change et on renvoie une pièce et non une position .
 
 ## Bibliothèques utilisées
 
