@@ -59,7 +59,7 @@ class game:
 
             if self.board == [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None]:
                 return {"response": "move",
-                        "move": {"pos": self.pos(),
+                        "move": {"pos": self.pos_random(),
                                 "piece":self.piece_giv},
                         "message": random.choice(self.list_message)
                     }
@@ -78,7 +78,7 @@ class game:
             if i != None:
                 self.list_piece_possible.remove(set(i))
 
-    def pos(self):
+    def pos_random(self):
         L = []
         for i,t in enumerate(self.board):
 
@@ -100,7 +100,7 @@ class game:
                 board_new[i] = self.piece_got
                 for line in self.lines:
                     D = {"S":0,"B":0,"D":0,"L":0,"E":0,"F":0,"P":0,"C":0}
-                    result = 0
+
                     for case in line:
                         if board_new[case] != None:
                             cara_case = set(board_new[case])
