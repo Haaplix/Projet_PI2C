@@ -128,7 +128,7 @@ class game:
         for i,t in enumerate(board_init):
             board_new = copy.deepcopy(self.board)
             for maybe_piece in list_piece_new:
-                #print(maybe_piece)
+
                 cara = maybe_piece
                 if t == None:
                     board_new[i] = maybe_piece
@@ -140,10 +140,10 @@ class game:
                             if i in line:
                                 if board_new[case] != None:
                                     cara_case = set(board_new[case])
-                                    result = len(cara.intersection(cara_case))
+                                    intersection = cara.intersection(cara_case)
                                     for lettre in cara:
                                         res = d.get(lettre)
-                                        if lettre in cara.intersection(cara_case):
+                                        if lettre in intersection:
                                             d[lettre] = res + 1
 
                         for key, value in d.items():
