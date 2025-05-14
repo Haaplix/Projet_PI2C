@@ -29,6 +29,8 @@ class game:
                      [0,5,10,15],
                      [3,6,9,12]]
         
+        self.list_message = ["wsh bb bien ou quoi ???", "jsp c'est trop dure de trouver qqch"]
+        
     
     
     @timeit
@@ -43,7 +45,8 @@ class game:
         
 
             return {"response": "move",
-                    "move": {"piece":piece_giv}
+                    "move": {"piece":piece_giv},
+                    "message": random.choice(self.list_message)
                     }
         
         else: 
@@ -56,14 +59,16 @@ class game:
 
             if self.board == [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None]:
                 return {"response": "move",
-                    "move": {"pos": self.pos(),
-                             "piece":self.piece_giv}
+                        "move": {"pos": self.pos(),
+                                "piece":self.piece_giv},
+                        "message": random.choice(self.list_message)
                     }
             else:
     
                 return {"response": "move",
                         "move": {"pos": self.heu_pos(),
-                                "piece":self.piece_that_we_give()}
+                                "piece":self.piece_that_we_give()},
+                        "message": random.choice(self.list_message)
                         }
         
 
