@@ -29,7 +29,7 @@ class game:
                  [0,5,10,15],
                  [3,6,9,12]]
     
-    self.list_message = ["wsh bb bien ou quoi ???", "jsp c'est trop dure de trouver qqch"]
+    self.list_message = ["Wallah, t'es trop guez", "C'est quoi ce move ???","Take the L","C'est un jeu de formes, mais je vais te plier en quatre","Une victoire de plus dans ma base de données","Ce coup est sponsorisé par l'intelligence artificielle","Je vais prétendre que j'ai perdu pour améliorer ton ego","Je suis plus carré que ces pièces","Je vois plus de connexions ici que dans ta box Wi-Fi"]
     
   
   
