@@ -5,6 +5,7 @@ Cet algorithme permet de jouer au jeu quarto grâce au gestionnaire de partie ht
 ## Stratégie
 Avant de commencer, il vaut mieux de préciser que nous n'avons pas fait comme éxpliquer dans le cours, c'est a dire utiliser une heuristique. Nous avons décider de le faire de notre maniére mais il a plusieures incovenients, le plus grand étant que nous pouvons pas "regarder" dans le future. Il serait surement possible de le faire avec notre code mais nous n'avions pas asser de temps. Cependant, avec les matchs qu'on a fait avec nos amis, notre bot fonctionne quand même plutôt bien.
 
+
 La stratégie utilisée pour permettre au bot de gagner ses parties est divisée en deux sections:
 * Poser la pièce reçue
 * Donner la pièce suivante
