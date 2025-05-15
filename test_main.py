@@ -1,6 +1,6 @@
 import pytest 
 import main 
-import test
+
 
 def test_si_dernier_move():
     result = main.game().move({
