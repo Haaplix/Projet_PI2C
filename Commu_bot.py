@@ -74,4 +74,4 @@ class Communication:
 
 
 
-Communication("192.168.1.24",3000).run() #! IP Julie
+Communication("172.17.10.24",3000).run() #! IP Julie
